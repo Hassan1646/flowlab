@@ -1,0 +1,22 @@
+# Secrets: never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Terraform (for when you add infra)
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+
+# Editor / OS junk
+.vscode/
+.idea/
+.DS_Store
