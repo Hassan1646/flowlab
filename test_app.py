@@ -3,11 +3,14 @@ from app import greet, farewell
 
 class TestGreet(unittest.TestCase):
     def test_greet(self):
-        self.assertEqual(greet("Hassan"), "Hey, Hassan!")
+        self.assertEqual(greet("Hassan"), "Hi, Hassan!")
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_custom_greeting(self):
+        self.assertEqual(greet("Hassan", "Hey"), "Hey, Hassan!")
 
 class TestFarewell(unittest.TestCase):
     def test_farewell(self):
         self.assertEqual(farewell("Hassan"), "Goodbye, Hassan!")
+
+if __name__ == "__main__":
+    unittest.main()
