@@ -1,5 +1,6 @@
-def greet(name):
-    return f"Hi, {name}!"
+
+def greet(name, greeting="Hi"):
+    return f"{greeting}, {name}!"
 
 
 def farewell(name):
