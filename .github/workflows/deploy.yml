@@ -1,0 +1,47 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest -v
+
+  deploy-dev:
+    if: github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - run: echo "Deploying ${{ github.sha }} to dev"
+
+  deploy-test:
+    if: github.ref == 'refs/heads/main'
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - run: echo "Deploying ${{ github.sha }} to test"
+
+  deploy-prod:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - run: echo "Deploying ${{ github.ref_name }} (${{ github.sha }}) to prod"
