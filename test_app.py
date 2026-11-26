@@ -3,7 +3,7 @@ from app import greet, farewell
 
 class TestGreet(unittest.TestCase):
     def test_greet(self):
-        self.assertEqual(greet("Hassan"), "Hello, Hassan!")
+        self.assertEqual(greet("Hassan"), "Hi, Hassan!")
 
 if __name__ == "__main__":
     unittest.main()
