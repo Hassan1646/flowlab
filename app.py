@@ -1,5 +1,6 @@
 
 def greet(name, greeting="Hi"):
+    name = name.strip() or "friend"
     return f"{greeting}, {name}!"
 
 
